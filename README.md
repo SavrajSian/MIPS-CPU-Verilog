@@ -1,4 +1,4 @@
-# IAC---Group-17-CPU
+# Group-17 CPU
 
 Hey guys, I set up this repository so we can all share our modules and testbenches.  
 
