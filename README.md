@@ -8,7 +8,7 @@ Plan Dates:
 >DEC 3:  Mini CPU + Mini Testbench  
 >DEC 17: Final Bus CPU + Final Testbench + Final Datasheet  
 
-Work Distribution:
+Instruction Distribution:
 
 >ADDU ADDIU : James, Saifullah  
 >JR         : Timur, Savraj  
