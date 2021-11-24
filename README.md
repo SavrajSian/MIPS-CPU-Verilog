@@ -2,8 +2,8 @@
 
 Hey guys, I set up this repository so we can all share our modules and testbenches.  
 
-PLAN **(TO BE UPDATED AFTER MEETING)**:
+PLAN Dates:
 
+>NOV 29: Working Basic Insturctions + Testbenches
 >DEC 3:  Mini CPU + Mini Testbench  
->DEC 17: Final Bus CPU + Final Testbench + Final Datasheet
-> 
+>DEC 17: Final Bus CPU + Final Testbench + Final Datasheet  
