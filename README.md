@@ -7,3 +7,9 @@ PLAN Dates:
 >NOV 29: Working Basic Insturctions + Testbenches  
 >DEC 3:  Mini CPU + Mini Testbench  
 >DEC 17: Final Bus CPU + Final Testbench + Final Datasheet  
+
+Work Distribution:
+
+>ADDU ADDIU : James, Saifullah  
+>JR         : Timur, Savraj  
+>LW SW      : Andy, Soma
