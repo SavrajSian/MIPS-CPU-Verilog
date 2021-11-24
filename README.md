@@ -2,7 +2,7 @@
 
 Hey guys, I set up this repository so we can all share our modules and testbenches.  
 
-PLAN Dates:
+Plan Dates:
 
 >NOV 29: Working Basic Insturctions + Testbenches  
 >DEC 3:  Mini CPU + Mini Testbench  
