@@ -10,6 +10,6 @@ Plan Dates:
 
 Instruction Distribution:
 
->ADDU ADDIU : James, Saifullah  
->JR         : Timur, Savraj  
->LW SW      : Andy, Soma
+>ADDU ADDIU INSTR + TB        : James, Saifullah  
+>JR INSTR + TB                : Timur, Savraj  
+>Register File + Control      : Andy, Soma
