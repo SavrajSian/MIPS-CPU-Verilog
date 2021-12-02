@@ -6,6 +6,7 @@ module regfile(
     input logic[31:0] Instruction,
     input logic[31:0] WriteData,
     input logic W_en,
+    output logic end_instr,
     output logic[31:0] ReadData1,
     output logic[31:0] ReadData2
 );
@@ -30,6 +31,7 @@ always_ff @(posedge clk) begin
         end
         else if (W_en == 1) begin
             regs[write_addr]<= writeData;
+            end_instr<=1; //added end_instr signal output to go into PC asking to fetch next instruction.
         end
     end
 end
