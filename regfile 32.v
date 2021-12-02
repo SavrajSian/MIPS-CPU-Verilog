@@ -21,7 +21,7 @@ assign read_addr_2 = Instruction[20:16];
 assign write_addr = reg_dst == 1 ? Instruction[15:11]:Instruction[20:16];
 
 always_ff @(posedge clk) begin
-    if valid==1:
+    if (valid==1) begin
         ReadData1 <= regs[read_addr_1];
         ReadData2 <= regs[read_addr_2];
         if (reset == 1) begin
@@ -30,7 +30,7 @@ always_ff @(posedge clk) begin
             end
         end
         else if (W_en == 1) begin
-            regs[write_addr]<= writeData;
+            regs[write_addr]<= WriteData;
             end_instr<=1; //added end_instr signal output to go into PC asking to fetch next instruction.
         end
     end
