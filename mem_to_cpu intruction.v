@@ -6,12 +6,17 @@ module mem_to_instruction(
 );
     
 always_comb begin
-    if delay == 1 begin
-        valid = 0;
+    if fetch == 1 begin      
+        if delay == 1 begin
+            valid = 0;
+        end
+        else begin
+            instruction = mem_in
+            valid = 1;
+        end
     end
     else begin
-        instruction = mem_in
-        valid = 1;
+        valid = 0;
     end
 end
 
