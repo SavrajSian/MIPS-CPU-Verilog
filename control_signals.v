@@ -1,7 +1,7 @@
 module control_signals(
-    input logic [31:0] instruction,
-    input logic end_of_instruction_reg
-    input logic end_of_instruction_store
+    input logic [31:0] inst,
+    input logic end_of_inst_reg
+    input logic end_of_inst_store
     output logic MemRead,
     output logic MemWrite,
     output logic ALUSrc,
@@ -13,32 +13,32 @@ module control_signals(
 );
 
 always_comb begin
-    if //load instruction begin
+    if inst==load begin
         MemRead = 1;
         ALUSrc = 1;
         RegWrite = 1;
         MemtoReg = 1;
         MemWrite = 0;
         RegDest = 0;
-        fetch = (end_of_instruction_reg==1)?1,0;
+        fetch = (end_of_inst_reg==1) ? 1:0;
     end
-    else if //store instruction begin
+    else if inst==store begin
         MemRead = 0;
         ALUSrc = 1;
         RegWrite = 0;
         MemWrite = 1;
-        always_ff@(negedge end_of_instruction_store) begin
+        always_ff@(negedge end_of_inst_store) begin
             fetch = 1;
         end
     end
-    else if //R instruction begin
+    else if inst==000000 begin
         MemRead = 0;
         ALUSrc = 0;
         RegWrite = 1;
         MemtoReg = 0;
         RegDest = 1;
         MemWrite = 0;
-        fetch = (end_of_instruction_reg==1)?1,0;
+        fetch = (end_of_inst_reg==1) ? 1:0;
     end
     
 end
