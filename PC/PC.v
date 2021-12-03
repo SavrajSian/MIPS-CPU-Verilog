@@ -36,7 +36,8 @@ module PC(
 		noop <= (JRcontrol==1)? 1 : 0;
 
 		if(reset == 1) begin
-			pcout <= 32'd0;
+			pcout <= 4;
+			pcin <=4;
 		end
 		
 		else begin
