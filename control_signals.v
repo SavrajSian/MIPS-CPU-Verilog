@@ -13,7 +13,7 @@ module control_signals(
 );
 
 always_comb begin
-    if inst[31:29]=100 begin //All loads follow this struct
+    if inst[31:29]= 3'b100 begin //All loads follow this struct
         MemRead = 1;
         ALUSrc = 1;
         RegWrite = 1;
@@ -22,7 +22,7 @@ always_comb begin
         RegDest = 0;
         fetch = (end_of_inst_reg==1) ? 1:0;
     end
-    else if inst==101011 begin //StoreWord
+    else if inst== 6'b101011 begin //StoreWord
         MemRead = 0;
         ALUSrc = 1;
         RegWrite = 0;
@@ -31,7 +31,7 @@ always_comb begin
             fetch = 1;
         end
     end
-    else if (inst[31:26]==000000 || inst[31:29]==001) begin //R or I-type
+    else if (inst[31:26]== 6'b000000 || inst[31:29]== 3'b001) begin //R or I-type
         MemRead = 0;
         ALUSrc = 0;
         RegWrite = 1;
