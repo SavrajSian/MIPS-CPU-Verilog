@@ -4,8 +4,8 @@ module PC(
 	input reset,
 	output logic[31:0] pcout,
 	input logic JRcontrol,
-	input logic Jump,
-	input logic Branch,
+	//input logic Jump,
+	//input logic Branch,
 	input logic[31:0] jumpaddr
 
 );	
