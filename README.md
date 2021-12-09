@@ -12,4 +12,6 @@ Instruction Distribution:
 
 >ADDU ADDIU INSTR + TB        : James, Saifullah  
 >JR INSTR + TB                : Timur, Savraj  
->Register File + Control      : Andy, Soma
+>Register File + Control      : Andy, Soma  
+
+CPU V0.9 is a 2 cycle mini cpu without store working. will work on that tom and upload V1 which should have it all.
