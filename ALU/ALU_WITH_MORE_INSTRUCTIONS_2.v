@@ -20,6 +20,8 @@ module ALU(
 	logic[4:0] shamt;
 	assign shamt = instruction[10:6];
 	
+	logic[31:0] hi;
+	logic[31:0] lo;
 	
 	logic[31:0] Reshold; //used to find byteenable in byte instructons
 	assign Reshold = (ReadData1+immediateSE);
@@ -46,7 +48,13 @@ always_comb begin
 			6'b000010: ALUResult = ReadData2 >> shamt; //SRL
 			6'b000110: ALUResult = ReadData2 >> ReadData1; //SRLV
 		endcase
-			
+		if(func == 6'b011000) begin
+			hi = ReadData1 * ReadData2;
+		end
+		if(func == 6'b011010) begin
+			hi = ReadData1 / ReadData2;
+			lo = ReadData1 % ReadData2;
+		end 	
 	end
 
 	else if(opcode == 6'b001000)begin
