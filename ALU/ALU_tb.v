@@ -46,6 +46,13 @@ initial begin
 	assert(byteenable == 4'b0010);
 	$display("STORE BYTE: Storing into byte %b in address %d", byteenable, ALUResult);
 	
+	instruction = 32'h3C000004; //LUI, immediate 4
+	ReadData1 = 5; //unused
+	reset = 0;
+	ReadData2 = 10; //unused
+	#10;
+	assert(ALUResult == 262144);
+	
 	ReadData1 = 30;
 	ReadData2 = 50;
 	instruction = 32'h014B4820;
