@@ -7,7 +7,7 @@ logic[31:0] ReadData2;
 logic[31:0] ALUResult;
 logic[3:0] byteenable;
 
-ALUbyte dut(.instruction(instruction), .ReadData1(ReadData1), .reset(reset), .ReadData2(ReadData2), .ALUResult(ALUResult), .byteenable(byteenable));
+ALU dut(.instruction(instruction), .ReadData1(ReadData1), .reset(reset), .ReadData2(ReadData2), .ALUResult(ALUResult), .byteenable(byteenable));
 
 initial begin
 	instruction = 32'h80000006; //immediate 6
