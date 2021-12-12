@@ -22,8 +22,8 @@ always_comb begin
 
 	if(opcode==0) begin
 		case(func)
-			6'b100000: ALUResult = ReadData1 + ReadData2; //ADDU
-			6'b100010: ALUResult = ReadData1 - ReadData2; //SUBU
+			6'b100001: ALUResult = ReadData1 + ReadData2; //ADDU
+			6'b100011: ALUResult = ReadData1 - ReadData2; //SUBU
 			//6'b011000: ALUResult = ReadData1 * ReadData2;
 			//6'b011010: ALUResult = ReadData1 / ReadData2;
 			6'b101010: ALUResult = ($signed(ReadData1) < $signed(ReadData2)) ? 1 : 0; //SLT
@@ -75,7 +75,8 @@ always_comb begin
 	end
 
 	else if(opcode == 6'b100000 || opcode == 6'b101000)begin
-		ALUResult = $floor((ReadData1 + immediateSE)/4);
+		ALUResult = ReadData1 + immediateSE;
+		ALUResult[1:0] = 2'b0; 
 		case((ReadData1+immediateSE)%4)
 			0: byteenable = 4'b0001;
 			1: byteenable = 4'b0010;
