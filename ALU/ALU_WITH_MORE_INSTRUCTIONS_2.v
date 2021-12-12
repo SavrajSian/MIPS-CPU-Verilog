@@ -11,6 +11,8 @@ module ALU(
 	assign opcode = instruction[31:26];
 	logic[5:0] func;
 	assign func = instruction[5:0];
+	logic[15:0] immediate;
+	assign immediate = instruction[15:0];
 	logic[31:0] immediateSE;
 	assign immediateSE = {{16{instruction[15]}}, instruction[15:0]};
 	logic[31:0] immediateZE;
@@ -54,6 +56,10 @@ always_comb begin
 	else if(opcode == 6'b100011 || opcode == 6'b101011)begin
 		ALUResult = (ReadData1 + immediateSE);//LW and SW
 		byteenable = 4'b1111;
+	end
+	
+	else if(opcode == 6'b001111)begin
+		ALUResult = {immediate, 16'b0}; //LUI	
 	end
 
 	else if(opcode == 6'b001010)begin
