@@ -35,7 +35,7 @@ module PC(
 					addrtojumpto = jumpaddr;
 				end
 				else if(Jcontrol == 1) begin
-					addrtojumpto = {(pcout+4)[31:28]], inst[25:0]<<2}; ////pcin here is meant to be address of instr after jump instr, not sure if thats case when this would be done - CHECK
+					addrtojumpto = {(pcout+4)[31:28], inst[25:0]<<2}; ////pcin here is meant to be address of instr after jump instr, not sure if thats case when this would be done - CHECK
 				end 
 				else if(BRANCH == 1) begin //branches all have same offset so would all have same target address
 					if(branchoffset[17] == 0) begin // signed offset - if MSB = 0 means positive number so add offset
