@@ -114,13 +114,21 @@ always_comb begin
 	end
 
 	else if(opcode == 6'b100000 || opcode == 6'b101000 || opcode == 6'b100100)begin
-		ALUResult = ReadData1 + immediateSE;
+		ALUResult = ReadData1 + immediateSE; //LB, LBU, SB
 		ALUResult[1:0] = 2'b0;		
 		case(Byteneeded)
 			0: byteenable = 4'b0001;
 			1: byteenable = 4'b0010;
 			2: byteenable = 4'b0100;
 			3: byteenable = 4'b1000;
+		endcase
+	end
+	else if(opcode == 6'b100001 || opcode = 6'b101001 || opcode == 6'b100101) begin
+		ALUResult = ReadData1 + immediateSE; //LH, LHU, SH
+		ALUResult[1:0] = 2'b0;
+		case(Byteneeded)
+			0: 4'b0011;
+			2: 4'b1100;
 		endcase
 	end
 end
