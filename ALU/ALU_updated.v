@@ -1,4 +1,4 @@
-module ALU(
+mmodule ALU(
 	input logic[31:0] instruction,
 	input logic[31:0] ReadData1,
 	input logic reset,
@@ -22,11 +22,23 @@ module ALU(
 	
     logic signed[31:0] SignedData1;
     logic signed[31:0] SignedData2;
+    
     logic [63:0] tmp;
     logic signed[63:0] s_tmp;
 
 	logic[31:0] hi;
 	logic[31:0] lo;
+
+    logic[31:0] hi_tmp;
+    logic[31:0] lo_tmp;
+    logic[31:0] shi_tmp;
+    logic[31:0] slo_tmp;
+
+    assign hi_tmp = tmp[63:32];
+    assign lo_tmp = tmp[31:0];
+    assign shi_tmp = s_tmp[63:32];
+    assign slo_tmp = s_tmp[31:0];
+
 	
 	logic[31:0] Reshold; //used to find byteenable in byte instructons
 	assign Reshold = (ReadData1+immediateSE);
@@ -60,8 +72,8 @@ always_comb begin
 		endcase
 		if(func == 6'b011000) begin //mulu
 			tmp = ReadData1 * ReadData2;
-            hi = tmp[63:32];
-            lo = tmp[31:0];
+            hi = hi_tmp;
+            lo = lo_tmp;
 		end
 		else if(func == 6'b011010) begin //divu
 			hi = ReadData1 / ReadData2;
@@ -69,8 +81,8 @@ always_comb begin
 		end 
         else if(func == 6'b011001) begin //mul
             s_tmp = SignedData1 * SignedData2;
-            hi = s_tmp[63:32];
-            lo = s_tmp[31:0];
+            hi = shi_tmp;
+            lo = slo_tmp;
         end
         else if(func == 6'b011011) begin //div
             hi = SignedData1 / SignedData2;
@@ -84,6 +96,7 @@ always_comb begin
 	
 	else if(opcode == 6'b100011 || opcode == 6'b101011)begin
 		ALUResult = (ReadData1 + immediateSE);//LW and SW
+		ALUResult[1:0] = 2'b0;
 		byteenable = 4'b1111;
 	end
 	
@@ -123,12 +136,13 @@ always_comb begin
 			3: byteenable = 4'b1000;
 		endcase
 	end
-	else if(opcode == 6'b100001 || opcode = 6'b101001 || opcode == 6'b100101) begin
+	else if(opcode == 6'b100001 || opcode == 6'b101001 || opcode == 6'b100101) begin
 		ALUResult = ReadData1 + immediateSE; //LH, LHU, SH
 		ALUResult[1:0] = 2'b0;
 		case(Byteneeded)
-			0: 4'b0011;
-			2: 4'b1100;
+			0: byteenable = 4'b0011;
+            		1: byteenable = 4'b0110;
+			2: byteenable = 4'b1100;
 		endcase
 	end
 end
