@@ -40,6 +40,23 @@ always_comb begin
 	if(opcode == 3'b000 || opcode == 3'b100)begin //LB & LBU
 		mem_out = (msbbyte==1 && opcode==3'b000)?{24'hFFFFFF, bytetmp}:{24'b0, bytetmp};
 	end
+	
+	if(opcode == 3'b110)begin //LWR
+		case(byteenable)
+			4'b0001: mem_out = {24'h0, mem0byte};            //endian conversions
+			4'b0011: mem_out = {16'h0, mem0byte, mem1byte};
+			4'b0111: mem_out = {8'h0, mem0byte, mem1byte, mem2byte};
+			4'b1111: mem_out = {mem0byte, mem1byte, mem2byte, mem3byte};
+		endcase
+	end
+	if(opcode == 3'b010)begin //LWL
+		case(byteenable)
+			4'b1000: mem_out = {24'h0, mem3byte};
+			4'b1100: mem_out = {16'h0, mem3byte, mem2byte};
+			4'b1110: mem_out = {8'h0 , mem3byte, mem2byte, mem1byte};
+			4'b1111: mem_out = {mem3byte, mem2byte, mem1byte, mem0byte};
+		endcase
+	end
 end
 
 endmodule
