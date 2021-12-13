@@ -16,28 +16,21 @@ module control_signals(
     output logic PCSrc,
     output logic MemtoReg,
     output logic endi,
-    output logic JRcontrol,
-    output logic Jcontrol,
-    output logic BRANCH
-    output logic truejump;
+    output logic jrtrue,
+    output logic jumptrue,
+    output logic branchtrue,
+    output logic truejump
 );
 
 logic [2:0] i_type;
 logic [5:0] op; 
 logic [3:0] jmp;
 logic [5:0] branchbits;
-logic Branchcontrol;
 ////Maybe get rid of following control sigs
-logic JALcontrol;
-logic JALRcontrol;
-logic BEQcontrol; 
-logic BGEZcontrol; 
-logic BGEZALcontrol;
-logic BGTZcontrol; 
-logic BLEZcontrol;
-logic BLTZcontrol;
-logic BLTZALcontrol;
-logic BNEcontrol; 
+logic jumptrue;
+logic branchtrue;
+logic jrtrue;
+logic link; 
 
 
 assign jmp = inst[3:0];
@@ -53,12 +46,14 @@ always_comb begin //
 	//end
 	
 	else if(op == 6'b000011) begin //JAL
-		JALcontrol = 1;
+		link = 1;
+		jumptrue = 1;
 	end
 	
 		
 	else if(op == 0 && jumpbits == 6'b001001) begin //JALR
-		JALRcontrol = 1;
+		link = 1;
+		jrtrue;
 	end
 	////JRcontrol DONE IN BOTTOM COMB BLOCK
 	//else if(op == 0 && jumpbits == 6'b001000) begin 
@@ -66,72 +61,79 @@ always_comb begin //
 	//end
 
 	if(op = 6'b000100) begin //BEQ
-		BEQcontrol =1;
-		Branchcontrol = 1;
 		if(readdata1 == readdata2) begin
-			truejump = 1; 
+			branchtrue = 1;
 		end
 	end
 	
 	else if(op = 6'b000001 && branchbits = 5'b00001) begin //BGEZ
-		BGEZcontrol = 1;
-		Branchcontrol = 1;
-		if(readdata1 => 0) begin
-			truejump = 1;
+		jumptrue = 0;
+		jrtrue = 0;
+		link = 0;
+		if(readdata1 >= 0) begin
+			branchtrue = 1;
 		end
 	end
 	
 	else if(op = 6'b000001 && branchbits = 5'b10001) begin //BGEZAL
-		BGEZALcontrol = 1;
-		Branchcontrol = 1;
 		if(readdata1 => 0) begin
-			truejump = 1;
+			branchtrue = 1;
+			link = 1;
+			jumptrue = 0;
+			jrtrue = 0;
 		end
 	end
 	
 	else if(op = 6'b000111 && branchbits == 0) begin //BGTZ
-		BGTZcontrol = 1;
-		Branchcontrol = 1;
 		if(readdata1 > 0) begin
-			truejump = 1;
+			branchtrue = 1;
+			jumptrue = 0;
+			jrtrue = 0;
+			link = 0;
 		end
 	end
 	
 	else if(op = 6'b000110 && branchbits == 0) begin //BLEZ
-		BLEZcontrol = 1;
-		Branchcontrol = 1;
 		if(readdata1 <= 0) begin
-			truejump = 1;
+			branchtrue = 1;
+			jumptrue = 0;
+			jrtrue = 0;
+			link = 0;
 		end
 	end
 	
 	else if(op = 6'b000001 && branchbits == 0) begin //BLTZ
-		BLTZcontrol = 1;
-		Branchcontrol = 1;
 		if(readdata1 < 0) begin
-			truejump = 1;
+			branchtrue = 1;
+			jumptrue = 0;
+			jrtrue = 0;
+			link = 0;
 		end
 	end
 	
 	else if(op = 6'b000001 && branchbits = 5'b10000) begin //BLTZAL
-		BLTZALcontrol = 1;
-		Branchcontrol = 1;
 		if(readdata1 < 0) begin
-			truejump = 1;
+			branchtrue = 1;
+			jumptrue = 0;
+			jrtrue = 0;
+			link = 0;
 		end
 	end
 	
 	else if(op = 6'b000101) begin //BNE
-		BNEcontrol = 1;
-		Branchcontrol = 1;
 		if(readdata1 != readdata2) begin
-			truejump = 1;
+			branchtrue = 1;
+			jumptrue = 0;
+			jrtrue = 0;
+			link = 0;
 		end
 	end
 	else begin
-		Branchcontrol = 0;
+		branchtrue = 0;
+		jumptrue = 0;
+		jrtrue = 0;
+		link = 0;
 	end
-
 end
 
 
