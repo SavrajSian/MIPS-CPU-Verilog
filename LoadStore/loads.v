@@ -8,8 +8,11 @@ module loads(
 logic[2:0] opcode;
 assign opcode = instruction[28:26];
 logic[7:0] bytetmp;
-logic msb;	
-assign msb = bytetmp[7];
+logic[15:0] halfwordtmp;
+logic msbbyte;	
+logic msbhalfword;
+assign msbbyte = bytetmp[7];
+assign msbhalfword = halfwordtmp[15];
 
 logic[7:0] mem0byte;
 logic[7:0] mem1byte;
@@ -22,17 +25,20 @@ assign mem3byte = mem_in[31:24];
 
 
 always_comb begin	
-	if(byteenable != 4'b1111)begin
-		case(byteenable)
-			4'b0001: bytetmp = mem0byte;
-			4'b0010: bytetmp = mem1byte;
-			4'b0100: bytetmp = mem2byte;
-			4'b1000: bytetmp = mem3byte;
-		endcase
-		mem_out = (msb==1 && opcode==3'b000)?{24'hFFFFFF, bytetmp}:{24'b0, bytetmp};
+	case(byteenable)
+		4'b1111: mem_out = {mem0byte, mem1byte, mem2byte, mem3byte}; //endian conversion
+		4'b0001: bytetmp = mem0byte; //endian conversions
+		4'b0010: bytetmp = mem1byte;
+		4'b0100: bytetmp = mem2byte;
+		4'b1000: bytetmp = mem3byte;
+		4'b1100: halfwordtmp = {mem2byte,mem3byte}; //endian conversion
+		4'b0011: halfwordtmp = {mem0byte, mem1byte}; //endian conversion
+	endcase
+	if(opcode == 3'b001 || opcode == 3'b101)begin //LH & LHU
+		mem_out = (msbhalfword==1 && opcode == 3'b001)?{16'hFFFF, halfwordtmp}:{16'h0, halfwordtmp};
 	end
-	else begin
-		mem_out = mem_in;
+	if(opcode == 3'b000 || opcode == 3'b100)begin //LB & LBU
+		mem_out = (msbbyte==1 && opcode==3'b000)?{24'hFFFFFF, bytetmp}:{24'b0, bytetmp};
 	end
 end
 
