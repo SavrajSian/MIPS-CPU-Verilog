@@ -145,6 +145,26 @@ always_comb begin
 			2: byteenable = 4'b1100;
 		endcase
 	end
+	else if(opcode = 6'b100110)begin
+		ALUResult = ReadData1 + immediateSE; //LWR
+		ALUResult[1:0] =2'b0;
+		case(Byteneeded)
+			0: byteenable = 4'b0001;
+			1: byteenable = 4'b0011;
+			2: byteenable = 4'b0111;
+			3: byteenable = 4'b1111;
+		endcase
+	end
+	else if(opcode = 6'b100010)begin
+		ALUResult = ReadData1 + immediateSE; //LWL
+		ALUResult[1:0] =2'b0;
+		case(Byteneeded)
+			0: byteenable = 4'b1111;
+			1: byteenable = 4'b1110;
+			2: byteenable = 4'b1100;
+			3: byteenable = 4'b1000;
+		endcase
+	end
 end
 
 
