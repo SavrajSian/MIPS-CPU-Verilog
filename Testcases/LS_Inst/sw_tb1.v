@@ -1,4 +1,4 @@
-module SW1();
+module sw_tb1();
 
 logic clk;
 logic reset;
