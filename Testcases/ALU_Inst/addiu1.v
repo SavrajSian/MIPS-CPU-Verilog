@@ -1,4 +1,4 @@
-module addi_1_tb ();
+module addiu1_tb ();
 
 logic clk;
 logic reset;
@@ -21,8 +21,8 @@ logic RAM_Reset;
 logic[7:0] inst_addr;
 
 initial begin  //only needed for debugging
-    $dumpfile("addi1_waveforms.vcd");
-    $dumpvars(0,addi_testcase_1);
+	$dumpfile("addiu1_waveforms.vcd");
+	$dumpvars(0,addiu1_tb;
 end
 
 initial begin //intialise clock
@@ -63,7 +63,7 @@ always@(negedge active) begin
     assert (register_v0 == 32'h69) else $fatal(2, "register value wrong");
 end
 
-top_level_CPU cpu_dut( /*Instantiate top_level_cpu*/
+top_level_cpu cpu_dut( /*Instantiate top_level_cpu*/
     /* Standard signals */
     .clk(clk),
     .reset(reset),
