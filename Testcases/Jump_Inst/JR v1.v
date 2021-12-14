@@ -43,27 +43,35 @@ initial begin
     inst_input = 1; /*turn on when you want to add instructions*/
 
     inst_addr = 8'h04; /*first address*/
-    instruction = 32'h240A0014;  /*first instruction*/
+    instruction = 32'h240ABFC0;  /*ADD BFC*/
     #1; /*seperate instructions by a delay of 1*/
 
-    inst_addr = 8'h08; /*addr + 4*/
+    inst_addr = 8'h08; 
+    instruction = 32'h000A5400; /*Shift BFC*/
+    #1;
+
+    inst_addr = 8'h0C; 
+    instruction = 32'h254A0018;  /*last 2 bits are where to jump to -4 // this exmaple is 1C-4*/
+    #1;
+
+    inst_addr = 8'h10;
     instruction = 32'h01400008;
     #1;
     
-    inst_addr = 8'h0C;
+    inst_addr = 8'h14;
     instruction = 32'h24020040;
     #1;
     
-    inst_addr = 8'h10;
+    inst_addr = 8'h18;
     instruction = 32'h24420060;
     #1;
     
-    inst_addr = 8'h14;
-    instruction = 8'h24420080;
+    inst_addr = 8'h1C;
+    instruction = 32'h24420080;
     #1;
     
-    inst_addr = 8'h18;
-    instruction = 8'h00000008;
+    inst_addr = 8'h20;
+    instruction = 32'h00000008;
     #1;
 
 
@@ -80,7 +88,7 @@ always@(negedge active) begin
     assert (register_v0 == 32'hC0) else $fatal(2, "register value wrong");
 end
 
-top_level_CPU cpu_dut( /*Instantiate top_level_cpu*/
+top_level_cpu cpu_dut( /*Instantiate top_level_cpu*/
     /* Standard signals */
     .clk(clk),
     .reset(reset),
