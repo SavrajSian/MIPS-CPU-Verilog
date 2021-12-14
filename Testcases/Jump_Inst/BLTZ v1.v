@@ -81,7 +81,7 @@ initial begin
 end
 
 always@(negedge active) begin 
-    assert (register_v0 == 32'h80) else $fatal(2, "register value wrong");
+	assert (register_v0 == 32'h70) else $fatal(2, "register value wrong");
 end
 
 top_level_CPU cpu_dut( /*Instantiate top_level_cpu*/
