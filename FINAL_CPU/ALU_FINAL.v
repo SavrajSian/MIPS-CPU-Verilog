@@ -91,7 +91,7 @@ always_comb begin
 	end
 
 	else if(opcode == 6'b001001)begin
-		ALUResult = ReadData1 + immediateSE; //ADDIU
+		ALUResult = ReadData1 + immediateZE; //ADDIU
 	end	
 	
 	else if(opcode == 6'b100011 || opcode == 6'b101011)begin
