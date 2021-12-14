@@ -46,7 +46,7 @@ initial begin
     #1; 
     
     inst_addr = 8'h08; 
-    instruction = 32'hACA0FFFF; // store value of register 0 at mem location
+    instruction = 32'hACA0AAAA; // store value of register 0 at mem location
     #1;
     
     inst_addr = 8'h0C; 
@@ -54,7 +54,7 @@ initial begin
     #1;
 
     inst_addr = 8'h10; 
-    instruction = 32'h8CA0FFFF; // load value of mem location to register 0
+    instruction = 32'h8CA0AAAA; // load value of mem location to register 0
     #1;
 
     inst_addr = 8'h14;
