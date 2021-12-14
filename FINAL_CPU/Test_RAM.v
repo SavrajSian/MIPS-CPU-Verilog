@@ -60,10 +60,10 @@ assign waitrequest = 0;
 
 always_comb begin
     if(inst_input == 1) begin
-        RAM[i0] = byte0;
-        RAM[i1] = byte1;
-        RAM[i2] = byte2;
-        RAM[i3] = byte3;
+        RAM[i0] = byte3;
+        RAM[i1] = byte2;
+        RAM[i2] = byte1;
+        RAM[i3] = byte0;
     end
 end
 
@@ -78,16 +78,16 @@ always_ff @(posedge clk ) begin
     end
     else if (write == 1) begin
         if(en_0 == 1) begin
-            RAM[addr0] <= writedata[7:0];
+            RAM[addr0] <= writedata[31:24];
         end
         if(en_1 == 1) begin
-            RAM[addr1] <= writedata[15:8];
+            RAM[addr1] <= writedata[23:16];
         end
         if(en_2 == 1) begin
-            RAM[addr2] <= writedata[23:16];
+            RAM[addr2] <= writedata[15:8];
         end
         if(en_3 == 1)  begin
-            RAM[addr3] <= writedata[31:24];
+            RAM[addr3] <= writedata[7:0];
         end
     end
 end
