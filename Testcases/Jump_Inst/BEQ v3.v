@@ -59,15 +59,15 @@ initial begin
     #1;
     
     inst_addr = 8'h14;
-    instruction = 8'h24420020;
+    instruction = 32'h24420020;
     #1;
     
     inst_addr = 8'h18;
-    instruction = 8'h24420005;
+    instruction = 32'h24420005;
     #1;
     
     inst_addr = 8'h1C;
-    instruction = 8'h24420040;
+    instruction = 32'h24420040;
     #1;
     
     inst_addr = 8'h20;
@@ -75,15 +75,15 @@ initial begin
     #1;
     
     inst_addr = 8'h24;
-    instruction = 8'h00000000;
+    instruction = 32'h00000000;
     #1;
     
     inst_addr = 8'h28;
-    instruction = 8'h24420030;
+    instruction = 32'h24420030;
     #1;
     
     inst_addr = 8'2C;
-    instruction = 8'h1064FFFB;
+    instruction = 32'h1064FFFB;
     #1;
     
 
