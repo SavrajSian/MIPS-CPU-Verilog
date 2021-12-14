@@ -9,7 +9,10 @@ module instr_reg(
     input logic fetch
 );
 
+logic[31:0] be_mem_in;
+
 assign valid_r = !fetch;
+assign be_mem_in = {mem_in[7:0],mem_in[15:8],mem_in[23:16],mem_in[31:24]};
 
 always_comb /*@(posedge clk)*/ begin
     if (reset == 1) begin
@@ -20,7 +23,7 @@ always_comb /*@(posedge clk)*/ begin
             //valid_r = 0;
         //end
         /*else*/ if (fetch == 1) begin
-            instruction = mem_in;
+            instruction = be_mem_in;
             //valid_r = 1;
             end_ctrl = 0;
         end
