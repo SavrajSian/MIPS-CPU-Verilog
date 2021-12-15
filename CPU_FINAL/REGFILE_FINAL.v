@@ -60,12 +60,18 @@ always_ff @(posedge clk) begin
 					4'b0111: regs[write_addr] <= {regval[31:24] ,MemData[23:0]};
 					4'b1111: regs[write_addr] <= MemData;
 				endcase
+				end_instr_reg<=1; 
+				v_read<=0;
 			end
 			else begin
 				regs[write_addr]<= WriteData;
-				end_instr_reg<=1; //added end_instr signal output to go into PC asking to fetch next instruction.
+				end_instr_reg<=1; 
 				v_read<=0;
 			end
+		end
+		else begin
+			end_instr_reg<=1; 
+			v_read<=0;
 		end
 	end
 	else if (active == 1) begin
