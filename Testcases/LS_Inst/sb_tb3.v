@@ -69,7 +69,7 @@ end
 always@(negedge active) begin
     read = 1;
     address = 32'h32;
-    assert (readdata == 32'h4500) else $fatal(2, "memory value wrong");
+    assert (readdata == 32'h6900) else $fatal(2, "memory value wrong");
 end
 
 

@@ -1,4 +1,4 @@
-module sb_tb1();
+module LBSB1();
 
 logic clk;
 logic reset;
@@ -42,19 +42,29 @@ initial begin
 
 
     inst_addr = 8'h04; 
-    instruction = 32'h24020069; // set value of register 0 to 69
+     
+    inst_addr = 8'h04; /*first address*/
+    instruction = 32'h240ABFC0;  /*ADD BFC*/
+    #1; /*seperate instructions by a delay of 1*/
+
+    inst_addr = 8'h08; 
+    instruction = 32'h000A5400; /*Shift BFC*/
+    #1;
+
+    inst_addr = 8'h0C; 
+    instruction = 32'h254A0015;  /*last 2 bits are where to jump to -4 // this exmaple is 1C-4*/
     #1;
     
-    inst_addr = 8'h04; 
-    instruction = 32'h24820064; // set value of register 4 to 64
+    inst_addr = 8'h10; 
+    instruction = 32'h81620000; // load value of mem[0x15] into $2
+    #1;
+    
+    inst_addr = 8'h14; 
+    instruction = 32'h00000008; /*halt instruction*/
     #1;
 
-    inst_addr = 8'h08;
-    instruction = 32'hA0800000; // s tore value of register 0 at mem location 64, taking mom location from register 4 without offset
-    #1;
-
-    inst_addr = 8'h14;
-    instruction = 32'h00000008;  /*halt instruction*/
+    inst_addr = 8'h19;
+    instruction = 69;  //storing to memory 
     #1;
 
     inst_input = 0; /*turn off when you finish*/
@@ -71,9 +81,7 @@ end
 
 
 always@(negedge active) begin
-    read = 1;
-    address = 32'h64;
-    assert (readdata == 32'h69) else $fatal(2, "memory value wrong");
+    assert (register_v0 == 32'h6900) else $fatal(2, "register value wrong");
 end
 
 
