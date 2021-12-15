@@ -42,12 +42,15 @@ initial begin
 
 
     inst_addr = 8'h04; 
-    instruction = 32'h24020069; // set value of register 0 to 69
+    instruction = 32'h2402FFAA; // set value of register 0 to -52
+    #1;
+    
+    inst_addr = 8'h04; 
+    instruction = 32'h24820064; // set value of register 4 to 64
     #1;
     
     inst_addr = 8'h08;
-    instruction = 32'hACA00032; // store value of register 0 at mem location
-    #1;
+    instruction = 32'hAC800000; // s tore value of register 0 at mem location 64, taking mom location from register 4 without offset
 
     inst_addr = 8'h14;
     instruction = 32'h00000008;  /*halt instruction*/
@@ -68,7 +71,7 @@ end
 
 always@(negedge active) begin
     read = 1;
-    address = 32'h32;
+    address = 32'h64;
     assert (readdata == 32'h69) else $fatal(2, "memory value wrong");
 end
 

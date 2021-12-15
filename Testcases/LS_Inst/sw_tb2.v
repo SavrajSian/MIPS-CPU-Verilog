@@ -42,7 +42,7 @@ initial begin
 
 
     inst_addr = 8'h04; 
-    instruction = 32'h24020069; // set value of register 0 to 69
+    instruction = 32'h2402FFAA; // set value of register 0 to -52
     #1;
     
     inst_addr = 8'h08;

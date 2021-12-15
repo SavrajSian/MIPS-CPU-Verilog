@@ -1,4 +1,4 @@
-module sw_tb1();
+module sb_tb1();
 
 logic clk;
 logic reset;
@@ -42,11 +42,11 @@ initial begin
 
 
     inst_addr = 8'h04; 
-    instruction = 32'h24020069; // set value of register 0 to 69
+    instruction = 32'h2402FFCC; // set value of register 0 to -52
     #1;
     
     inst_addr = 8'h08;
-    instruction = 32'hACA00032; // store value of register 0 at mem location
+    instruction = 32'hA0A00032; // store value of register 0 at mem location
     #1;
 
     inst_addr = 8'h14;
@@ -69,7 +69,7 @@ end
 always@(negedge active) begin
     read = 1;
     address = 32'h32;
-    assert (readdata == 32'h69) else $fatal(2, "memory value wrong");
+    assert (readdata == 32'hFFCC) else $fatal(2, "memory value wrong");
 end
 
 
