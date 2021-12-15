@@ -42,7 +42,6 @@ logic jrtrue;
 logic branchtrue;
 logic link;
 logic jalr;
-logic[31:0] pcnext;
 logic halt;
 logic[31:0] reg_data_in;
 logic[31:0] alu_data;
@@ -84,7 +83,6 @@ PC pc_dut(
     .pcout(inst_addr),
     .end_j(end_j),
     .linkaddr(linkaddr),
-    .pcnext(pcnext),
     .link(link)
 );
 
