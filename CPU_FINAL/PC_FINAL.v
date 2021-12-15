@@ -7,7 +7,6 @@ module PC(
 	input logic[31:0] RegData,
     input logic link,
 	output logic[31:0] pcout,
-	output logic[31:0] pcnext,
 	output logic end_j,
 	output logic[31:0] linkaddr,
 	input logic jcontrol,
@@ -15,6 +14,7 @@ module PC(
 	input logic bcontrol
 );	
 	logic[31:0] pcin = 0;
+	logic[31:0] pcnext;
 	logic[31:0] addrtojumpto;
 	logic[3:0] pc_chunk;
 	logic[31:0] jraddr; // regfile
