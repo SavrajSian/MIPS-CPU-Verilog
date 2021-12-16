@@ -1,4 +1,4 @@
-module subu_tb1();
+module subu_tb1_tb();
 
 logic clk;
 logic reset;
@@ -71,7 +71,7 @@ always@(negedge active) begin
     assert (register_v0 == 32'h10) else $fatal(2, "register value wrong");
 end
 
-top_level_CPU cpu_dut( /*Instantiate top_level_cpu*/
+top_level_cpu cpu_dut( /*Instantiate top_level_cpu*/
     /* Standard signals */
     .clk(clk),
     .reset(reset),
