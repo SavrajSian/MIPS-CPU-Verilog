@@ -88,7 +88,7 @@ always_comb begin
 	end
 	
 	else if(op == 6'b000001 && branchbits == 5'b10001) begin //BGEZAL
-		branchtrue = (rd1bit15 >= 0) ? 1:0;
+		branchtrue = (rd1bit15 == 0) ? 1:0;
         link = 1;
         jumptrue = 0;
         jalr = 0;
@@ -112,7 +112,7 @@ always_comb begin
 	end
 	
 	else if(op == 6'b000001 && branchbits == 0) begin //BLTZ
-		branchtrue = (readdata1 < 0) ? 1:0;
+		branchtrue = (rd1bit15 == 1) ? 1:0;
 		jumptrue = 0;
         jalr = 0;
 		jrtrue = 0;
@@ -120,7 +120,7 @@ always_comb begin
 	end
 	
 	else if(op == 6'b000001 && branchbits == 5'b10000) begin //BLTZAL
-		branchtrue = (readdata1 < 0) ? 1:0;
+		branchtrue = (rd1bit15 == 1) ? 1:0;
         jumptrue = 0;
         jalr = 0;
         jrtrue = 0;
