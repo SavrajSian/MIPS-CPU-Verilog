@@ -62,7 +62,7 @@ always_comb begin
 			6'b101011: ALUResult = (ReadData1 < ReadData2) ? 1 : 0; //SLTU
 			6'b100100: ALUResult = ReadData1 & ReadData2; //AND
 			6'b100101: ALUResult = ReadData1 | ReadData2; //OR
-			6'b101000: ALUResult = ReadData1 ^ ReadData2; //XOR
+			6'b100110: ALUResult = ReadData1 ^ ReadData2; //XOR
 			6'b000000: ALUResult = ReadData2 << shamt; //SLL
 			6'b000100: ALUResult = ReadData2 << ReadData1; //SLLV
 			6'b000011: ALUResult = ReadData2 >>> shamt; //SRA
