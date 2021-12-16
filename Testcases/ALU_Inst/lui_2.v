@@ -1,4 +1,4 @@
-module lui_tb2_tb();
+module lui_2_tb();
 
 logic clk;
 logic reset;
