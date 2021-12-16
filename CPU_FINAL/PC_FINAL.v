@@ -5,7 +5,7 @@ module PC(
 	input reset,
 	input logic[31:0] instruction,
 	input logic[31:0] RegData,
-    input logic link,
+    	input logic link,
 	output logic[31:0] pcout,
 	output logic end_j,
 	output logic[31:0] linkaddr,
@@ -20,12 +20,17 @@ module PC(
 	logic[31:0] jraddr; // regfile
 	logic[31:0] jaddr; // last 26 bits of inst shift 2, concatenated w first 4 bits of next address
 	logic[31:0] braddr; // last 16 bits of inst shift 2, added to next address
-	logic signed[31:0] b_add_tmp;
+	logic [17:0] b_add_tmp;
 	logic[25:0] j_add_tmp;
-
+	logic inst15;
+	logic [14:0]inst15ext;
+	
+	//assign b_add_tmp = {{14{instruction[15]}},instruction[15:0]<<2 };
 	assign pc_chunk = pcnext[31:28];
 	assign b_add_tmp = instruction[15:0]<<2;
 	assign j_add_tmp = instruction[25:0]<<2;
+	assign inst15 = instruction[15];
+	assign inst15ext = {14{inst15}};
 
 	always_comb begin
 		if(reset == 1) begin
@@ -35,7 +40,7 @@ module PC(
 		end
 		else if (active == 1) begin
 			pcnext = pcin + 4;
-			linkaddr = pcnext + 4;
+			linkaddr = pcnext ;
 			if(jcontrol == 1) begin
 				jaddr = {pc_chunk,j_add_tmp};
 				addrtojumpto = jaddr;
@@ -47,12 +52,12 @@ module PC(
 				end_j = (link == 1)? 0:1;
 			end
 			else if(bcontrol == 1) begin
-				braddr = pcnext+b_add_tmp;
+				braddr = pcout+ { {14{inst15}}, b_add_tmp};
 				addrtojumpto = braddr;
 				end_j = (link == 1)? 0:1;
 			end
 
-		end
+		end           
 	end
 		
 
