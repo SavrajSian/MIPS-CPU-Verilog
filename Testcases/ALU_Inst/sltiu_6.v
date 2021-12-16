@@ -1,4 +1,4 @@
-module sltiu_tb6 ();
+module sltiu_6_tb ();
 
 logic clk;
 logic reset;
