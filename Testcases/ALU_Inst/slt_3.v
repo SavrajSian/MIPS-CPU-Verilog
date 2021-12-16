@@ -1,4 +1,4 @@
-module slt_tb3_tb ();
+module slt_3_tb ();
 
 logic clk;
 logic reset;
