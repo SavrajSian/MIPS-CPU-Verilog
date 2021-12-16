@@ -1,4 +1,4 @@
-module mthi_tb2_tb();
+module mthi_2_tb();
 
 logic clk;
 logic reset;
