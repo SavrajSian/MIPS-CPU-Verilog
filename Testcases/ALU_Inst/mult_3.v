@@ -1,4 +1,4 @@
-module mult_tb3_tb ();
+module mult_3_tb ();
 
 logic clk;
 logic reset;
