@@ -1,4 +1,4 @@
-module mtlo_tb1_tb();
+module mtlo_1_tb();
 
 logic clk;
 logic reset;
