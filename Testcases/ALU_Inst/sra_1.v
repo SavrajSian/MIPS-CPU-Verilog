@@ -1,4 +1,4 @@
-module sra_tb1_tb();
+module sra_1_tb();
 
 logic clk;
 logic reset;
