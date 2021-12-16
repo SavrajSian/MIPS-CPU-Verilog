@@ -1,4 +1,4 @@
-module sltu_tb2_tb ();
+module sltu_2_tb ();
 
 logic clk;
 logic reset;
