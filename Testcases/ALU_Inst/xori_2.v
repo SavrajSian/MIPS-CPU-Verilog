@@ -1,4 +1,4 @@
-module xori_tb2_tb();
+module xori_2_tb();
 
 logic clk;
 logic reset;
