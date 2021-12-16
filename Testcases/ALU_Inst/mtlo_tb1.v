@@ -38,29 +38,29 @@ initial begin
     RAM_Reset = 1;
     #10;
     RAM_Reset = 0;
-    inst_input = 1; /*turn on when you want to add instructions*/
+    inst_input = 1;
 
     inst_addr = 8'h04; 
-    instruction = 32'h24020010;  //add 10 to $2
+    instruction = 32'h24020010;
     #1; 
 
     inst_addr = 8'h08; 
-    instruction = 32'h00400013;  //Move $2 to LO
+    instruction = 32'h00400013;
     #1; 
 
     inst_addr = 8'h0C; 
-    instruction = 32'h24420010;  //add 10 to $2
+    instruction = 32'h24420010;
     #1; 
 
     inst_addr = 8'h10; 
-    instruction = 32'h00001012;  //Move LO to $2
+    instruction = 32'h00001012;
     #1; 
 
     inst_addr = 8'h14; 
-    instruction = 32'h00000008; /*halt instruction*/
+    instruction = 32'h00000008;
     #1;
 
-    inst_input = 0; /*turn off when you finish*/
+    inst_input = 0;
 end
 
 
