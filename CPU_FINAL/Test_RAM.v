@@ -10,7 +10,9 @@ module RAM(
     input logic[31:0] instruction,
     input logic inst_input,
     input logic RAM_Reset,
-    input logic clk
+    input logic clk,
+	output logic[31:0] RAM30
+
 );
 
 logic[7:0] RAM[255:0];
@@ -40,7 +42,7 @@ assign byte1 = instruction[15:8];
 assign byte2 = instruction[23:16];
 assign byte3 = instruction[31:24];
 
-assign eff_addr = address - 32'hBFC00000 + 4;
+assign eff_addr = address + 4 - 32'hBFC00000;
 assign addr0 = eff_addr;
 assign addr1 = eff_addr + 1;
 assign addr2 = eff_addr + 2;
@@ -57,6 +59,7 @@ assign en_2 = byteenable[2];
 assign en_3 = byteenable[3];
 
 assign waitrequest = 0;
+assign RAM30 = {RAM[51], RAM[50], RAM[49], RAM[48]};
 
 always_comb begin
     if(inst_input == 1) begin
@@ -78,16 +81,16 @@ always_ff @(posedge clk ) begin
     end
     else if (write == 1) begin
         if(en_0 == 1) begin
-            RAM[addr0] <= writedata[31:24];
+            RAM[addr0] <= writedata[7:0];
         end
         if(en_1 == 1) begin
-            RAM[addr1] <= writedata[23:16];
+            RAM[addr1] <= writedata[15:8];
         end
         if(en_2 == 1) begin
-            RAM[addr2] <= writedata[15:8];
+            RAM[addr2] <= writedata[23:16];
         end
         if(en_3 == 1)  begin
-            RAM[addr3] <= writedata[7:0];
+            RAM[addr3] <= writedata[31:24];
         end
     end
 end

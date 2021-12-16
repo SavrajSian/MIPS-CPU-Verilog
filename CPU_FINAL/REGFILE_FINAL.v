@@ -52,7 +52,7 @@ always_ff @(posedge clk) begin
 		if (write_addr != 0) begin
 			if(Instruction[31:26] == 6'b100110 || Instruction[31:26] == 6'b100010)begin
 				case(byteenable)
-					4'b1000: regs[write_addr] <= {MemData[7:0], regval[24:0]};
+					4'b1000: regs[write_addr] <= {MemData[7:0], regval[23:0]};
 					4'b1100: regs[write_addr] <= {MemData[15:0], regval[15:0]};
 					4'b1110: regs[write_addr] <= {MemData[23:0], regval[7:0]};
 					4'b0001: regs[write_addr] <= {regval[31:8], MemData[7:0]};

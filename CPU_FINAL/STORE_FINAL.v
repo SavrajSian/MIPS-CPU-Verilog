@@ -18,13 +18,19 @@ assign LB3_read_data_b = Read_data_b[23:16];
 assign LB4_read_data_b = Read_data_b[31:24];
 
 always_comb begin
-	case(opcode)
-		3'b001: write_data = (byteenable==4'b1100)?{{LB_read_data_b, LB2_read_data_b}, 16'h0}:{16'h0, {LB_read_data_b, LB2_read_data_b}};//Endianess conversion
-		3'b011: write_data = {LB_read_data_b, LB2_read_data_b, LB3_read_data_b, LB4_read_data_b}; //endian converted
-	endcase
+	if(opcode == 3'b011)begin
+		write_data = {LB_read_data_b, LB2_read_data_b, LB3_read_data_b, LB4_read_data_b}; //endian converted
+	end
+	if(opcode == 3'b001)begin
+		case(byteenable)
+			4'b0011: write_data = {16'h0, LB_read_data_b, LB2_read_data_b};
+			4'b0110: write_data = {8'h0, LB_read_data_b, LB2_read_data_b, 8'h0};
+			4'b1100: write_data = {LB_read_data_b, LB2_read_data_b, 16'h0};
+		endcase
+	end
 	if(opcode == 3'b000)begin
 		case(byteenable)
-			4'b0001: write_data = {24'b0,LB_read_data_b}; //endian converted
+			4'b0001: write_data = {24'b0, LB_read_data_b}; //endian converted
 			4'b0010: write_data = {16'b0,LB_read_data_b, 8'b0};
 			4'b0100: write_data = {8'b0,LB_read_data_b, 16'b0};
 			4'b1000: write_data = {LB_read_data_b, 24'b0};

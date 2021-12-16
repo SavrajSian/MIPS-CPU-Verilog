@@ -36,6 +36,7 @@ always_comb begin
 			4'b0010: bytetmp = mem1byte;
 			4'b0100: bytetmp = mem2byte;
 			4'b1000: bytetmp = mem3byte;
+			4'b0110: halfwordtmp = {mem1byte, mem2byte};
 			4'b1100: halfwordtmp = {mem2byte,mem3byte}; //endian conversion
 			4'b0011: halfwordtmp = {mem0byte, mem1byte}; //endian conversion
 		endcase
@@ -57,9 +58,9 @@ always_comb begin
 		if(opcode == 3'b010)begin //LWL
 			case(byteenable)
 				4'b1000: mem_out = {24'h0, mem3byte};
-				4'b1100: mem_out = {16'h0, mem3byte, mem2byte};
-				4'b1110: mem_out = {8'h0 , mem3byte, mem2byte, mem1byte};
-				4'b1111: mem_out = {mem3byte, mem2byte, mem1byte, mem0byte};
+				4'b1100: mem_out = {16'h0, mem2byte, mem3byte};
+				4'b1110: mem_out = {8'h0 , mem1byte, mem2byte, mem3byte};
+				4'b1111: mem_out = {mem0byte, mem1byte, mem2byte, mem3byte};
 			endcase
 		end
 	end
