@@ -1,4 +1,4 @@
-module ori_tb2_tb();
+module ori_2_tb();
 
 logic clk;
 logic reset;
