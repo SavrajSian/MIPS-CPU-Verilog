@@ -1,4 +1,4 @@
-module or_tb2_tb();
+module or_2_tb();
 
 logic clk;
 logic reset;
