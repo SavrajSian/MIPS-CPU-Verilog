@@ -173,6 +173,7 @@ always_comb begin
         ALUSrc = 1;
         RegWrite = 0;
         MemWrite = 1;
+	MemtoReg = 1;
 		
     end
     else if (jrtrue == 1||jumptrue == 1||branchtrue == 1) begin //JR    JALR uses same jump dest
