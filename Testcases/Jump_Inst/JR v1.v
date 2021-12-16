@@ -20,11 +20,6 @@ logic inst_input;
 logic RAM_Reset;
 logic[7:0] inst_addr;
 
-initial begin  //only needed for debugging
-    $dumpfile("JR1_waveforms.vcd");
-    $dumpvars(0,JR_testcase_1);
-end
-
 initial begin //intialise clock
 	clk = 0;
 	repeat (2000) begin
