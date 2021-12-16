@@ -10,9 +10,7 @@ module RAM(
     input logic[31:0] instruction,
     input logic inst_input,
     input logic RAM_Reset,
-    input logic clk,
-	
-
+    input logic clk
 );
 
 logic[7:0] RAM[255:0];
