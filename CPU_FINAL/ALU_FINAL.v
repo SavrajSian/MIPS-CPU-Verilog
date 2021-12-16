@@ -77,7 +77,7 @@ always_comb begin
             hi = hi_tmp;
             lo = lo_tmp;
 		end
-		else if(func == 6'b011010) begin //divu
+		else if(func == 6'b011011) begin //divu
 			hi = ReadData1 / ReadData2;
 			lo = ReadData1 % ReadData2;
 		end 
@@ -86,7 +86,7 @@ always_comb begin
             hi = shi_tmp;
             lo = slo_tmp;
         end
-        else if(func == 6'b011011) begin //div
+		else if(func == 6'b011010) begin //div
             hi = SignedData1 / SignedData2;
             lo = SignedData1 % SignedData2;
         end
