@@ -20,10 +20,7 @@ logic inst_input;
 logic RAM_Reset;
 logic[7:0] inst_addr;
 
-initial begin  //only needed for debugging
-    $dumpfile("BLTZ4_waveforms.vcd");
-    $dumpvars(0,bltzv4_tb);
-end
+
 
 initial begin //intialise clock
 	clk = 0;
