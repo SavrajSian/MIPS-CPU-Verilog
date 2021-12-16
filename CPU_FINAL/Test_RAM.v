@@ -11,7 +11,7 @@ module RAM(
     input logic inst_input,
     input logic RAM_Reset,
     input logic clk,
-	output logic[31:0] RAM30
+	
 
 );
 
@@ -59,7 +59,6 @@ assign en_2 = byteenable[2];
 assign en_3 = byteenable[3];
 
 assign waitrequest = 0;
-assign RAM30 = {RAM[51], RAM[50], RAM[49], RAM[48]};
 
 always_comb begin
     if(inst_input == 1) begin
