@@ -1,4 +1,4 @@
-module xor_tb2_tb();
+module xor_2_tb();
 
 logic clk;
 logic reset;
