@@ -1,4 +1,4 @@
-module srlv_tb1();
+module srlv_tb1_tb();
 
 logic clk;
 logic reset;
