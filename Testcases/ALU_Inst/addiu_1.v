@@ -1,4 +1,4 @@
-module addiu1_tb ();
+module addiu_1_tb ();
 
 logic clk;
 logic reset;
