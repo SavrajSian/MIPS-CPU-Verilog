@@ -1,4 +1,4 @@
-module ori_tb2();
+module ori_tb2_tb();
 
 logic clk;
 logic reset;
@@ -66,12 +66,12 @@ end
 
 
 always@(negedge active) begin
-    assert (register_v0 == 32'hFFFFF0FF) else $fatal(2, "register value wrong");
+	assert (register_v0 == 32'h0000F0FF) else $fatal(2, "register value wrong");
 end
 
 
 
-top_level_CPU cpu_dut( /*Instantiate top_level_cpu*/
+top_level_cpu cpu_dut( /*Instantiate top_level_cpu*/
     /* Standard signals */
     .clk(clk),
     .reset(reset),
