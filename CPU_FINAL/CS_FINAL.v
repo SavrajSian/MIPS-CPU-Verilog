@@ -96,7 +96,7 @@ always_comb begin
 	end
 	
 	else if(op == 6'b000111 && branchbits == 0) begin //BGTZ
-		branchtrue = (rd1bit15 == 0 && readdat1 != 0) ? 1:0;
+		branchtrue = (rd1bit15 == 0 && readdata1 != 0) ? 1:0;
         jumptrue = 0;
         jalr = 0;
         jrtrue = 0;
