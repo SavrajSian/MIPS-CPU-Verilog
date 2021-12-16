@@ -1,4 +1,4 @@
-module and_tb2_tb();
+module and_2_tb();
 
 logic clk;
 logic reset;
