@@ -1,4 +1,4 @@
-module multu_tb2_tb ();
+module multu_2_tb ();
 
 logic clk;
 logic reset;
