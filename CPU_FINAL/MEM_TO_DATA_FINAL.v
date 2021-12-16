@@ -25,9 +25,11 @@ always_comb begin
         end_of_store = 0;
     end
     else if (mem_sel == 0) begin /* if not load/store*/
-        if(v_read == 1 && w_en) begin
+		end_of_store = 0;
+		if(v_read == 1 && w_en) begin
             data_to_load = alu_in;
             valid_w = 1;
+			
         end
         else begin
             valid_w = 0;
@@ -38,6 +40,7 @@ end
 
 always_ff @(posedge clk) begin
     if (ls_op ==6'b101 && v_load == 1) begin /*if store*/
+		valid_w<= 0;
         if(delay == 0) begin 
             end_of_store <= 1;
         end
@@ -46,7 +49,8 @@ always_ff @(posedge clk) begin
         end
     end
     else if (mem_sel == 1) begin /*if load*/
-        if(delay == 0 && v_load == 1) begin 
+        end_of_store<= 0;
+		if(delay == 0 && v_load == 1) begin 
             data_to_load <= mem_in;
             valid_w <= 1;
         end

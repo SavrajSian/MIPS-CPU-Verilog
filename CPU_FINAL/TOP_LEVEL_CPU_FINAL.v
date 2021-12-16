@@ -65,7 +65,7 @@ always_ff @(negedge clk) begin
     fetch = (end_ctrl==1)?endi:end_ctrl;
 end
 always_ff @(posedge clk) begin
-    v_load <= v_read;
+	v_load <= v_read;
 end
 
 
@@ -186,5 +186,4 @@ control_signals control_dut(
 );
 
 endmodule
-
 
