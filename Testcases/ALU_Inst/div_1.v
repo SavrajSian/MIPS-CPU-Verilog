@@ -1,4 +1,4 @@
-module div_tb1_tb ();
+module div_1_tb ();
 
 logic clk;
 logic reset;
