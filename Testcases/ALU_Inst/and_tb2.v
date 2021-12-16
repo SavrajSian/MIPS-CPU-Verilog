@@ -1,4 +1,4 @@
-module and_tb2();
+module and_tb2_tb();
 
 logic clk;
 logic reset;
@@ -75,7 +75,7 @@ end
 
 
 
-top_level_CPU cpu_dut( /*Instantiate top_level_cpu*/
+top_level_cpu cpu_dut( /*Instantiate top_level_cpu*/
     /* Standard signals */
     .clk(clk),
     .reset(reset),
