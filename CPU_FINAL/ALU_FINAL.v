@@ -72,7 +72,7 @@ always_comb begin
 			6'b000010: ALUResult = ReadData2 >> shamt; //SRL
 			6'b000110: ALUResult = ReadData2 >> rd1lsbs5; //SRLV
 		endcase
-		if(func == 6'b011000) begin //mulu
+		if(func == 6'b011001) begin //mulu
 			tmp = ReadData1 * ReadData2;
             hi = hi_tmp;
             lo = lo_tmp;
@@ -81,7 +81,7 @@ always_comb begin
 			hi = ReadData1 / ReadData2;
 			lo = ReadData1 % ReadData2;
 		end 
-        else if(func == 6'b011001) begin //mul
+		else if(func == 6'b011000) begin //mul
             s_tmp = SignedData1 * SignedData2;
             hi = shi_tmp;
             lo = slo_tmp;
