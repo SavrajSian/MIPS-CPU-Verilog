@@ -23,9 +23,9 @@ always_comb begin
 	end
 	if(opcode == 3'b001)begin
 		case(byteenable)
-			4'b0011: write_data = {16'h0, LB_read_data_b, LB2_read_data_b};
-			4'b0110: write_data = {8'h0, LB_read_data_b, LB2_read_data_b, 8'h0};
-			4'b1100: write_data = {LB_read_data_b, LB2_read_data_b, 16'h0};
+			4'b0011: write_data = {16'h0, {LB_read_data_b, LB2_read_data_b}};
+			4'b0110: write_data = {8'h0, {{LB_read_data_b, LB2_read_data_b}, 8'h0}};
+			4'b1100: write_data = {LB_read_data_b, {LB2_read_data_b, 16'h0}};
 		endcase
 	end
 	if(opcode == 3'b000)begin
