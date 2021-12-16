@@ -70,7 +70,6 @@ end
 
 
 always@(negedge active) begin
-    $display("%h", register_v0);
     assert (register_v0 == 32'h0FF0) else $fatal(2, "register value wrong");
 end
 
