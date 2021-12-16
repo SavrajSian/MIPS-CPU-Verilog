@@ -1,4 +1,4 @@
-module srav_tb2();
+module srav_tb2_tb();
 
 logic clk;
 logic reset;
