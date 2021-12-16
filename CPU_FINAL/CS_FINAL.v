@@ -28,6 +28,7 @@ logic [5:0] op;
 logic [3:0] jmp;
 logic [5:0] branchbits;
 logic rd1bit15;
+logic [5:0] jumpbits;
 ////Maybe get rid of following control sigs
 
 
@@ -38,6 +39,7 @@ assign rd1bit15 = readdata1[15];
 assign endi = end_of_inst_store || end_of_inst_reg || end_j;   
 assign halt = end_of_inst_store || end_of_inst_reg;
 assign branchbits = inst[20:16]; 
+assign jumpbits = inst[5:0];
 
 always_comb begin 
 	if(op == 6'b000010) begin //J
@@ -56,7 +58,7 @@ always_comb begin
         jrtrue = 0;
 	end
 	
-    else if(op==0 && jmp==8) begin //JR
+    else if(op==0 && jumpbits==6'b001000) begin //JR
         jrtrue = 1;
         jalr = 0;
         branchtrue = 0;
@@ -64,7 +66,7 @@ always_comb begin
         link = 0;
     end
 
-    else if(op == 0 && jmp == 9) begin //JALR
+    else if(op == 0 && jumpbits == 6'b001001) begin //JALR
 		link = 1;
 		jrtrue = 1;
         jalr = 1;
