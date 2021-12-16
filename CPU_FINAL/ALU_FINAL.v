@@ -33,11 +33,13 @@ module ALU(
     logic[31:0] lo_tmp;
     logic[31:0] shi_tmp;
     logic[31:0] slo_tmp;
+    logic[4:0] rd1lsbs5;
 
     assign hi_tmp = tmp[63:32];
     assign lo_tmp = tmp[31:0];
     assign shi_tmp = s_tmp[63:32];
     assign slo_tmp = s_tmp[31:0];
+    assign rd1lsbs5 = ReadData1[4:0];
 
 	
 	logic[31:0] Reshold; //used to find byteenable in byte instructons
@@ -64,11 +66,11 @@ always_comb begin
 			6'b100101: ALUResult = ReadData1 | ReadData2; //OR
 			6'b100110: ALUResult = ReadData1 ^ ReadData2; //XOR
 			6'b000000: ALUResult = ReadData2 << shamt; //SLL
-			6'b000100: ALUResult = ReadData2 << ReadData1; //SLLV
+			6'b000100: ALUResult = ReadData2 << rd1lsbs5; //SLLV
 			6'b000011: ALUResult = ReadData2 >>> shamt; //SRA
-			6'b000111: ALUResult = ReadData2 >>> ReadData1; //SRAV
+			6'b000111: ALUResult = ReadData2 >>> rd1lsbs5; //SRAV
 			6'b000010: ALUResult = ReadData2 >> shamt; //SRL
-			6'b000110: ALUResult = ReadData2 >> ReadData1; //SRLV
+			6'b000110: ALUResult = ReadData2 >> rd1lsbs5; //SRLV
 		endcase
 		if(func == 6'b011000) begin //mulu
 			tmp = ReadData1 * ReadData2;
