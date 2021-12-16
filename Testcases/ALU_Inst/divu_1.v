@@ -1,4 +1,4 @@
-module divu_tb1_tb ();
+module divu_1_tb ();
 
 logic clk;
 logic reset;
