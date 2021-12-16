@@ -1,4 +1,4 @@
-module subu_tb2_tb();
+module subu_2_tb();
 
 logic clk;
 logic reset;
