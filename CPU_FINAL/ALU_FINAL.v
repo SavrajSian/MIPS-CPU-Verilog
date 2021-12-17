@@ -78,8 +78,8 @@ always_comb begin
             lo = lo_tmp;
 		end
 		else if(func == 6'b011011) begin //divu
-			hi = ReadData1 / ReadData2;
-			lo = ReadData1 % ReadData2;
+			lo = ReadData1 / ReadData2;
+			hi = ReadData1 % ReadData2;
 		end 
 		else if(func == 6'b011000) begin //mul
             s_tmp = SignedData1 * SignedData2;
@@ -87,8 +87,8 @@ always_comb begin
             lo = slo_tmp;
         end
 		else if(func == 6'b011010) begin //div
-            hi = SignedData1 / SignedData2;
-            lo = SignedData1 % SignedData2;
+            lo = SignedData1 / SignedData2;
+            hi = SignedData1 % SignedData2;
         end
 	end
 
