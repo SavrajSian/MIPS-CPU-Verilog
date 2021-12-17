@@ -68,7 +68,7 @@ initial begin
     #1;
     
     inst_addr = 8'h20;
-    instruction = 32'h00001010;
+    instruction = 32'h00001012;
     #1;
     
     inst_addr = 8'h24;
@@ -76,7 +76,7 @@ initial begin
     #1;
     
     inst_addr = 8'h28;
-    instruction = 32'h00001812;
+    instruction = 32'h00001810;
     #1;
     
     inst_addr = 8'h2C;
