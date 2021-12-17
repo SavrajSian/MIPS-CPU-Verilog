@@ -21,7 +21,6 @@ logic RAM_Reset;
 logic[7:0] inst_addr;
 
 
-
 initial begin //intialise clock
 	clk = 0;
 	repeat (2000) begin
